@@ -57,22 +57,29 @@ const Navigation = () => {
           </button>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-            <Button variant="outline" size="sm">
-              Download CV
-            </Button>
-          </div>
+<div className="hidden md:flex items-center space-x-8">
+  {navItems.map((item) => (
+    <button
+      key={item.id}
+      onClick={() => scrollToSection(item.id)}
+      className={`text-sm font-medium transition-colors hover:text-primary ${
+        activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
+      }`}
+    >
+      {item.label}
+    </button>
+  ))}
+
+  {/* Download CV button */}
+  <a
+    href="/Tife-CV.pdf" // make sure the file is in the public folder
+    download
+    className="text-sm font-medium px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition-colors"
+  >
+    Download CV
+  </a>
+</div>
+
           
           {/* Mobile Menu Button */}
           <button
