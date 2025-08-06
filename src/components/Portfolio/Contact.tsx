@@ -127,8 +127,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg">Location</h3>
-                    <p className="text-muted-foreground">Abuja, NIgeria</p>
-                    <p className="text-muted-foreground">Kaduna, NIgeria</p>
+                    <p className="text-muted-foreground">Abuja, Nigeria</p>
+                    <p className="text-muted-foreground">Kaduna, Nigeria</p>
                   </div>
                 </div>
               </CardContent>
