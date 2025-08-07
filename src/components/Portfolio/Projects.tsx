@@ -34,8 +34,8 @@ const Projects = () => {
       title: "Weather App",
       description: "Beautiful weather application with location-based forecasts, interactive maps, and detailed weather analytics.",
       tech: ["Vue.js", "TypeScript", "OpenWeather API", "Mapbox"],
-      github: "#",
-      demo: "#",
+      github: "https://github.com/Isaacog12/Weather-app",
+      demo: "https://weather-55.vercel.app/",
       image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=500&h=300&fit=crop"
     },
     {
