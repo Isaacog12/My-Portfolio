@@ -27,7 +27,7 @@ const Projects = () => {
       description: "Collaborative task management platform with real-time updates, team collaboration features, and progress tracking.",
       tech: ["Next.js", "React", "Supabase", "Framer Motion"],
       github: "https://github.com/Isaacog12/task-manager-app",
-      demo: "https://task-manager-app-7bb8.vercel.app/",
+      demo: "https://task-manager-appone.vercel.app/",
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop"
     },
     {
