@@ -17,8 +17,8 @@ const Projects = () => {
       title: "Humanoid",
       description: "Humanoid is a modern web application designed to be smart, responsive, and developer-friendly. It serves as a scalable base for building intelligent interfaces — whether for personal tools, healthcare dashboards, admin panels, or advanced UI experiences.",
       tech: ["React", "Vite","TypeScript", "Tailwind CSS", "Chart.js"],
-      github: "#",
-      demo: "#",
+      github: "https://github.com/Isaacog12/Humanoid",
+      demo: "https://humanoid-vercel.vercel.app/",
       image: "https://i.postimg.cc/wvYWXv3f/5663820f-6c97-4492-9210-9eaa1a8dc415.jpg"
     },
     
