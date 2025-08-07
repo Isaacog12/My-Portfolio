@@ -51,15 +51,11 @@ const About = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">Projects Completed</span>
-                  <span className="font-bold text-xl text-accent">25+</span>
+                  <span className="font-bold text-xl text-accent">7+</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">Technologies Mastered</span>
-                  <span className="font-bold text-xl text-accent">12+</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Coffee Consumed</span>
-                  <span className="font-bold text-xl text-accent">∞</span>
+                  <span className="font-bold text-xl text-accent">5+</span>
                 </div>
               </div>
             </CardContent>
