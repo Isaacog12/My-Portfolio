@@ -12,6 +12,16 @@ const Projects = () => {
       demo: "#",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop"
     },
+     
+    {
+      title: "Humanoid",
+      description: "Humanoid is a modern web application designed to be smart, responsive, and developer-friendly. It serves as a scalable base for building intelligent interfaces — whether for personal tools, healthcare dashboards, admin panels, or advanced UI experiences.",
+      tech: ["React", "Vite","TypeScript", "Tailwind CSS", "Chart.js"],
+      github: "#",
+      demo: "#",
+      image: "https://i.postimg.cc/wvYWXv3f/5663820f-6c97-4492-9210-9eaa1a8dc415.jpg"
+    },
+    
     {
       title: "Task Management App",
       description: "Collaborative task management platform with real-time updates, team collaboration features, and progress tracking.",
