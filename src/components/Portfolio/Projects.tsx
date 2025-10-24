@@ -5,7 +5,7 @@ import { ExternalLink, Github } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
-      title: "E-Market (On going work)",
+      title: "E-Market (On going project)",
       description: "A comprehensive admin dashboard for managing online store operations with real-time analytics and inventory management.",
       tech: ["React", "TypeScript", "Tailwind CSS", "Chart.js"],
       github: "#",
