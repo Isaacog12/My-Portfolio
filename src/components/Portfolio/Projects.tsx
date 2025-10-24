@@ -5,7 +5,7 @@ import { ExternalLink, Github } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
-      title: "E-Commerce Dashboard",
+      title: "E-Market (On going work)",
       description: "A comprehensive admin dashboard for managing online store operations with real-time analytics and inventory management.",
       tech: ["React", "TypeScript", "Tailwind CSS", "Chart.js"],
       github: "#",
@@ -39,7 +39,7 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=500&h=300&fit=crop"
     },
     {
-      title: "Learning Platform",
+      title: "Learning Platform (on going project)",
       description: "Online learning platform with video streaming, progress tracking, and interactive coding exercises.",
       tech: ["Next.js", "Prisma", "PostgreSQL", "Stripe"],
       github: "#",
