@@ -24,19 +24,14 @@ const Skills = () => {
       skills: ["Tailwind CSS", "Styled Components", "Figma"]
     },
     {
-      icon: SmartphoneNfc,
+      icon: Smartphone,
       title: "Mobile & Responsive",
       skills: ["React Native", "Progressive Web Apps", "Mobile-First Design", "Cross-Browser Testing"]
     },
     {
-      icon: Zap,
-      title: "Performance & SEO",
-      skills: ["Lighthouse Optimization", "Core Web Vitals", "Lazy Loading", "SEO Best Practices"]
-    },
-    {
       icon: Database,
       title: "Backend Integration",
-      skills: ["REST APIs", "GraphQL", "Firebase", "Supabase", "Node.js", "Express"]
+      skills: ["REST APIs", "Firebase", "Supabase", "Node.js", "Express"]
     },
     {
       icon: GitBranch,
