@@ -5,7 +5,10 @@ import {
   Smartphone, 
   Zap, 
   Database, 
-  GitBranch 
+  GitBranch, 
+  SmartphoneCharging,
+  Car,
+  SmartphoneNfc
 } from "lucide-react";
 
 const Skills = () => {
@@ -13,15 +16,15 @@ const Skills = () => {
     {
       icon: Code2,
       title: "Frontend Technologies",
-      skills: ["React", "TypeScript", "Next.js", "Vue.js", "HTML5", "CSS3"]
+      skills: ["React", "TypeScript", "Next.js", "HTML5", "CSS3"]
     },
     {
       icon: Palette,
       title: "Styling & Design",
-      skills: ["Tailwind CSS", "Styled Components", "SASS", "Figma", "Adobe XD", "Material-UI"]
+      skills: ["Tailwind CSS", "Styled Components", "Figma"]
     },
     {
-      icon: Smartphone,
+      icon: SmartphoneNfc,
       title: "Mobile & Responsive",
       skills: ["React Native", "Progressive Web Apps", "Mobile-First Design", "Cross-Browser Testing"]
     },
