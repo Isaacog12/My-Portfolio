@@ -1,165 +1,143 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
-import { useState } from "react";
+import { Mail, MapPin, Phone, Send, Sparkles, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
     toast({
-      title: "Message sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
+      title: "Message received! 🚀",
+      description: "I'll personally get back to you within 24 hours.",
     });
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ name: "", email: "", message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
-    <section className="py-20 px-4 bg-muted/30">
+    <section className="py-24 px-6 bg-[#030712] relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full -z-10" />
+
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Let's Work Together
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? I'd love to hear about it and discuss how we can bring your ideas to life.
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-8">
-          <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold">Send a Message</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <Input
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="bg-background/50 border-border/50 focus:border-primary"
-                  />
+        <div className="grid lg:grid-cols-5 gap-12 items-start">
+          
+          {/* Left Column: Info (Spans 2) */}
+          <div className="lg:col-span-2 space-y-12">
+            <div>
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6">
+                Let's build <br />
+                <span className="text-muted-foreground italic font-serif">something great.</span>
+              </h2>
+              <p className="text-zinc-400 text-lg max-w-sm leading-relaxed">
+                I'm currently open to new collaborations and full-time opportunities.
+              </p>
+            </div>
+
+            {/* Availability Badge */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+              </span>
+              <span className="text-emerald-500 text-sm font-medium tracking-wide">Available for new projects</span>
+            </div>
+
+            {/* Quick Contact Links */}
+            <div className="space-y-6">
+              {[
+                { icon: Mail, label: "Email", value: "isaacnerds@gmail.com", href: "mailto:isaacnerds@gmail.com" },
+                { icon: Phone, label: "Phone", value: "+234 703 298 3433", href: "tel:+2347032983433" },
+                { icon: MapPin, label: "Location", value: "Abuja / Kaduna, Nigeria", href: "#" },
+              ].map((item, i) => (
+                <a 
+                  href={item.href} 
+                  key={i} 
+                  className="flex items-center gap-4 group transition-all"
+                >
+                  <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:border-primary/50 group-hover:bg-primary/5 transition-all">
+                    <item.icon className="w-5 h-5 text-zinc-400 group-hover:text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-mono uppercase tracking-widest text-zinc-500">{item.label}</p>
+                    <p className="text-zinc-200 group-hover:text-white transition-colors">{item.value}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Form (Spans 3) */}
+          <Card className="lg:col-span-3 bg-white/[0.02] border-white/10 backdrop-blur-2xl p-2 rounded-[2rem]">
+            <CardContent className="p-8 md:p-12">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-xs font-mono uppercase tracking-widest text-zinc-500 ml-1">Full Name</label>
+                    <Input
+                      name="name"
+                      placeholder="John Doe"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="h-12 bg-white/5 border-white/10 focus:border-primary/50 text-white rounded-xl"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-mono uppercase tracking-widest text-zinc-500 ml-1">Email Address</label>
+                    <Input
+                      name="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="h-12 bg-white/5 border-white/10 focus:border-primary/50 text-white rounded-xl"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <Input
-                    name="email"
-                    type="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="bg-background/50 border-border/50 focus:border-primary"
-                  />
-                </div>
-                <div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-mono uppercase tracking-widest text-zinc-500 ml-1">Your Message</label>
                   <Textarea
                     name="message"
-                    placeholder="Your Message"
+                    placeholder="Tell me about your project..."
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={6}
-                    className="bg-background/50 border-border/50 focus:border-primary resize-none"
+                    rows={5}
+                    className="bg-white/5 border-white/10 focus:border-primary/50 text-white rounded-xl resize-none p-4"
                   />
                 </div>
-                <Button type="submit" variant="hero" className="w-full">
-                  <Send className="w-4 h-4" />
-                  Send Message
+
+                <Button 
+                  type="submit" 
+                  className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground text-lg font-bold rounded-xl transition-all group"
+                >
+                  <span className="flex items-center gap-2">
+                    Send Message
+                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </span>
                 </Button>
+
+                <p className="text-center text-zinc-500 text-xs">
+                  By clicking send, you agree to start an awesome conversation.
+                </p>
               </form>
             </CardContent>
           </Card>
-          
-          <div className="space-y-6">
-            <Card className="bg-card/50 backdrop-blur-sm border-primary/20 hover:bg-card-hover transition-colors duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-skill-gradient rounded-lg">
-                    <Mail className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg">Email</h3>
-                    <p className="text-muted-foreground">isaacnerds@gmail.com</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-card/50 backdrop-blur-sm border-primary/20 hover:bg-card-hover transition-colors duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-skill-gradient rounded-lg">
-                    <Phone className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg">Phone</h3>
-                    <p className="text-muted-foreground">+234 703 298 3433</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-card/50 backdrop-blur-sm border-primary/20 hover:bg-card-hover transition-colors duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-skill-gradient rounded-lg">
-                    <MapPin className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg">Location</h3>
-                    <p className="text-muted-foreground">Abuja, Nigeria</p>
-                    <p className="text-muted-foreground">Kaduna, Nigeria</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <div className="pt-6">
-              <h3 className="text-xl font-bold mb-4">Available for:</h3>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span>Freelance Projects</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span>Contract Work</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span>Consulting</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span>Remote Jobs</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span>Full-time Opportunities</span>
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
     </section>
