@@ -12,7 +12,7 @@ const skillCategories = [
   {
     icon: Code2,
     title: "Frontend Tech",
-    skills: ["React", "TypeScript", "Next.js", "HTML5", "CSS3"],
+    skills: ["React", "TypeScript", "HTML5", "CSS3"],
     color: "from-blue-500/20 to-cyan-500/20",
     span: "md:col-span-2"
   },
