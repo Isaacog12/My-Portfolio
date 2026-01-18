@@ -1,6 +1,6 @@
 import React from "react";
-import { Github, Linkedin, Mail, Heart, ArrowUp, Zap } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, ArrowUp, Sparkles } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,80 +10,90 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative py-20 px-6 bg-[#030712] border-t border-white/5 overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[200px] bg-primary/5 blur-[100px] -z-10" />
+    <footer className="relative py-24 px-6 bg-[#0a0a0a] border-t border-white/5 overflow-hidden">
+      {/* Soft Blue Bottom Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[150px] bg-blue-600/5 blur-[120px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start mb-16">
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-16 mb-20">
           
           {/* Brand Column */}
-          <div className="space-y-4 text-center md:text-left">
-            <h3 className="text-2xl font-bold tracking-tighter text-white">
-              OGBOMO <span className="text-zinc-500 italic font-serif">ISAAC</span>
-            </h3>
-            <p className="text-zinc-500 text-sm max-w-[250px] mx-auto md:mx-0 leading-relaxed">
-              Full-stack engineer building digital products with high technical precision.
+          <div className="space-y-8">
+            <div className="flex items-center gap-3">
+               <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
+                <Sparkles size={14} className="text-black" />
+              </div>
+              <h3 className="text-xl font-bold tracking-tighter text-white">
+                OGBOMO <span className="text-zinc-500 italic font-serif font-light">ISAAC</span>
+              </h3>
+            </div>
+            
+            <p className="text-zinc-500 text-sm max-w-xs leading-relaxed font-light">
+              Crafting high-performance digital environments with technical precision and human-centered design.
             </p>
-            <div className="flex items-center justify-center md:justify-start gap-2 pt-2">
-              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">
-                Available for hire
+
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full shadow-[0_0_8px_#3b82f6]" />
+              <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">
+                Open for 2026 Opportunities
               </span>
             </div>
           </div>
 
-          {/* Navigation/Links Column */}
-          <div className="flex flex-col items-center space-y-4">
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-600">Connect</p>
-            <div className="flex items-center gap-4">
+          {/* Social Directory */}
+          <div className="space-y-6">
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-700">Social Directory</p>
+            <div className="flex flex-col gap-4">
               {[
-                { icon: Github, href: "https://github.com/Isaacog12" },
-                { icon: Linkedin, href: "https://linkedin.com" },
-                { icon: Mail, href: "mailto:isaacnerds@gmail.com" },
-              ].map((social, i) => (
+                { name: "GitHub", href: "https://github.com/Isaacog12", icon: Github },
+                { name: "LinkedIn", href: "#", icon: Linkedin },
+                { name: "Twitter", href: "#", icon: Mail },
+              ].map((social) => (
                 <a
-                  key={i}
+                  key={social.name}
                   href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+                  className="group flex items-center gap-3 text-zinc-500 hover:text-white transition-all duration-300"
                 >
-                  <social.icon size={20} />
+                  <social.icon size={16} strokeWidth={1.5} className="group-hover:text-blue-400" />
+                  <span className="text-xs font-medium tracking-tight">{social.name}</span>
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Action Column */}
-          <div className="flex flex-col items-center md:items-end space-y-4">
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-600">Navigation</p>
-            <Button 
-              variant="outline" 
-              onClick={scrollToTop}
-              className="group rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-white h-12 px-6 gap-2"
-            >
-              Back to Top
-              <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
-            </Button>
+          {/* Navigation & Action */}
+          <div className="flex flex-col md:items-end justify-between">
+            <div className="space-y-6 md:text-right">
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-700">Navigation</p>
+              <button 
+                onClick={scrollToTop}
+                className="group flex items-center gap-3 text-zinc-500 hover:text-white transition-all ml-auto md:ml-0"
+              >
+                <span className="text-xs font-medium tracking-tight uppercase">Return to top</span>
+                <div className="w-10 h-10 rounded-full border border-white/5 bg-white/[0.03] flex items-center justify-center group-hover:border-blue-500/50 group-hover:bg-blue-500/5 transition-all">
+                  <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-zinc-600 text-[11px] uppercase tracking-[0.2em] font-medium">
-            © {currentYear} All Rights Reserved
-          </p>
-          
-          <div className="flex items-center gap-2 text-zinc-500 text-xs">
-            <span>Built with</span>
-            <Zap size={12} className="text-primary fill-primary" />
-            <span>in Nigeria</span>
+        {/* Legal & Credits Bar */}
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-8">
+            <p className="text-zinc-600 text-[10px] uppercase tracking-[0.2em]">
+              © {currentYear} Ogbomo Isaac
+            </p>
+            <div className="hidden sm:block h-px w-8 bg-zinc-800" />
+            <p className="text-zinc-600 text-[10px] uppercase tracking-[0.2em]">
+              Handcrafted in <span className="text-zinc-400">Nigeria</span>
+            </p>
           </div>
-
-          <p className="text-zinc-600 text-[11px] uppercase tracking-[0.2em] font-medium">
-            Designed for <span className="text-zinc-400">Excellence</span>
-          </p>
+          
+          <div className="flex items-center gap-4 text-zinc-500 text-[10px] uppercase tracking-[0.3em] font-bold">
+            <span className="text-zinc-700 italic">Designed for</span>
+            <span className="text-zinc-300">Excellence</span>
+          </div>
         </div>
       </div>
     </footer>

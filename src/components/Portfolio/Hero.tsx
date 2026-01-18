@@ -1,108 +1,153 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Sparkles, MoveRight } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
 
 const Hero = () => {
-  const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  const [time, setTime] = useState("");
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // 1. Working 12-hour Clock Logic
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      }));
+    };
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // 2. Fluid Mouse Parallax (Gentler than before)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    mouseX.set((clientX / innerWidth - 0.5) * 20);
+    mouseY.set((clientY / innerHeight - 0.5) * 20);
   };
 
+  const springConfig = { stiffness: 50, damping: 20 };
+  const dx = useSpring(mouseX, springConfig);
+  const dy = useSpring(mouseY, springConfig);
+
+  // 3. Subtle Scroll Fade
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 200], [1, 0]);
+  const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
+
   return (
-    <section className="min-h-screen relative flex items-center justify-center overflow-hidden bg-[#030712]">
-      {/* 1. Pro Background Integration */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="http://googleusercontent.com/image_collection/image_retrieval/15196447018231054855_0"
-          alt="Professional Abstract Tech Background"
-          className="w-full h-full object-cover opacity-40 scale-105 animate-pulse-slow"
-        />
-        {/* Layered Overlays for Depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030712]/80 via-transparent to-[#030712]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#030712] via-transparent to-[#030712]" />
+    <section 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className="min-h-screen relative flex items-center justify-center overflow-hidden bg-[#0a0a0a] selection:bg-zinc-800 selection:text-white"
+    >
+      {/* --- Organic Background --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Soft Grain */}
+        <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-50" />
         
-        {/* Cinematic Animated Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[140px] animate-glow-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[140px] animate-glow-pulse [animation-delay:2s]" />
+        {/* Fluid Light Blooms */}
+        <motion.div style={{ x: dx, y: dy }} className="absolute inset-0">
+          <div className="absolute top-[10%] left-[15%] w-[40vw] h-[40vw] bg-blue-600/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-[10%] right-[15%] w-[35vw] h-[35vw] bg-zinc-500/5 rounded-full blur-[100px]" />
+        </motion.div>
       </div>
 
-      {/* 2. Content Container */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        <div className="space-y-8">
-          
-          {/* Availability Badge */}
-          <div className="opacity-0 animate-fade-up [animation-delay:200ms] [animation-fill-mode:forwards]">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl mb-4 shadow-2xl">
-              <Sparkles className="w-4 h-4 text-yellow-500 animate-pulse" />
-              <span className="text-[10px] font-bold tracking-[0.2em] text-zinc-300 uppercase">
-                Available for new opportunities
-              </span>
-            </div>
-          </div>
+      {/* --- Main Content --- */}
+      <motion.div 
+        style={{ opacity, scale }}
+        className="relative z-10 w-full max-w-5xl px-8 flex flex-col items-center text-center"
+      >
+        {/* Intro Tag */}
+        <motion.p 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-zinc-500 text-sm tracking-[0.2em] uppercase mb-6 font-medium"
+        >
+          Independent Developer & Researcher
+        </motion.p>
 
-          {/* Main Title */}
-          <h1 className="opacity-0 animate-fade-up [animation-delay:400ms] [animation-fill-mode:forwards] text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter text-white leading-[0.85]">
-            Full-Stack <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-500 italic font-serif font-light tracking-tight">
-              Developer
-            </span>
-          </h1>
+        {/* The Title: Elegant & Modern */}
+        <div className="relative mb-10">
+          <motion.h1 
+            initial={{ opacity: 0, filter: "blur(8px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] }}
+            className="text-7xl md:text-[11rem] font-medium tracking-tight text-white leading-[0.8]"
+          >
+            FULL <br />
+            <span className="font-serif italic font-light text-zinc-400">STACK DEVLOPER</span>
+           
+          </motion.h1>
+        </div>
 
-          {/* Subtext */}
-          <p className="opacity-0 animate-fade-up [animation-delay:600ms] [animation-fill-mode:forwards] text-lg md:text-2xl text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light">
-            Merging <span className="text-white font-normal">Technical Excellence</span> with <br />
-            <span className="text-white italic font-serif">Intuitive Human Design.</span>
-          </p>
-          
-          {/* Action Buttons */}
-          <div className="opacity-0 animate-fade-up [animation-delay:800ms] [animation-fill-mode:forwards] flex flex-col sm:flex-row gap-5 justify-center items-center pt-6">
-            <Button 
-              size="lg" 
-              className="h-16 px-10 rounded-full bg-white text-black hover:bg-zinc-200 transition-all duration-300 group font-bold text-lg shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              View My Work
-              <MoveRight className="ml-2 w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
-            </Button>
+        {/* Narrative Description (Humanized) */}
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="max-w-xl text-lg md:text-xl text-zinc-500 font-light leading-relaxed mb-12"
+        >
+          Dedicated to building digital products that feel 
+          <span className="text-zinc-300"> effortless </span> 
+          and perform with <span className="text-zinc-300"> uncompromising logic.</span>
+        </motion.p>
+        
+        {/* Sophisticated CTA */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="flex flex-col sm:flex-row gap-10 items-center"
+        >
+          <button 
+            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+            className="group relative flex items-center gap-4 text-white uppercase text-xs tracking-[0.3em] font-bold"
+          >
+            <span>View Recent Works</span>
+            <div className="w-8 h-px bg-zinc-700 group-hover:w-12 transition-all duration-500" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
 
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="h-16 px-10 rounded-full border-white/10 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 font-bold text-lg transition-all"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Get in Touch
-            </Button>
-          </div>
-          
-          {/* Social Links */}
-          <div className="opacity-0 animate-fade-up [animation-delay:1000ms] [animation-fill-mode:forwards] flex gap-10 justify-center pt-10">
+          <div className="flex items-center gap-8">
             {[
-              { icon: Github, href: "https://github.com/isaacog12" },
-              { icon: Linkedin, href: "https://linkedin.com" },
-              { icon: Mail, href: "mailto:isaacnerds@gmail.com" }
-            ].map((social, i) => (
-              <a 
+              { Icon: Github, href: "https://github.com/isaacog12" },
+              { Icon: Linkedin, href: "#" },
+              { Icon: Mail, href: "mailto:isaacnerds@gmail.com" }
+            ].map(({ Icon, href }, i) => (
+              <a
                 key={i}
-                href={social.href} 
-                target="_blank" 
-                className="text-zinc-500 hover:text-white transition-all transform hover:scale-125 duration-300"
+                href={href}
+                className="text-zinc-600 hover:text-white transition-colors duration-500"
               >
-                <social.icon size={26} strokeWidth={1.5} />
+                <Icon size={20} strokeWidth={1.2} />
               </a>
             ))}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       
-      {/* Refined Scroll Indicator */}
-      <div className="opacity-0 animate-fade-up [animation-delay:1400ms] [animation-fill-mode:forwards] absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-        <span className="text-[9px] uppercase tracking-[0.4em] text-zinc-500 font-black">Explore</span>
-        <button 
-          onClick={scrollToAbout}
-          className="w-[30px] h-[50px] border-2 border-white/10 rounded-full flex justify-center p-1.5 hover:border-primary/50 transition-colors group"
-        >
-          <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" />
-        </button>
+      {/* --- Minimalist Footer --- */}
+      <div className="absolute bottom-12 left-0 w-full px-12 flex justify-between items-center text-zinc-600">
+        <div className="text-[10px] tracking-[0.2em] uppercase font-medium">
+          Based in Nigeria
+        </div>
+        
+        {/* Simple Working Clock */}
+        <div className="flex items-center gap-4">
+           <div className="w-1 h-1 bg-zinc-800 rounded-full" />
+           <p className="text-[11px] font-mono tracking-tighter text-zinc-500 uppercase">
+            Local / {time || "00:00 AM"}
+          </p>
+        </div>
       </div>
     </section>
   );
