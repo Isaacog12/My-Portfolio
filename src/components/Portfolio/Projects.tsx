@@ -8,7 +8,7 @@ const projects = [
     title: "E-Market",
     status: "In Progress",
     tech: ["React", "TS", "Chart.js"],
-    github: "#",
+    github: "https://github.com/Isaacog12/E-Market",
     demo: "#",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80",
   },
@@ -40,7 +40,7 @@ const projects = [
     title: "Learning Platform",
     status: "In Progress",
     tech: ["Next.js", "Prisma", "Stripe"],
-    github: "#",
+    github: "https://github.com/Isaacog12/learning-platform",
     demo: "#",
     image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=500&q=80",
   }

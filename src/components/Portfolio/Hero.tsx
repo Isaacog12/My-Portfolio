@@ -84,7 +84,7 @@ const Hero = () => {
             className="text-7xl md:text-[11rem] font-medium tracking-tight text-white leading-[0.8]"
           >
             FULL <br />
-            <span className="font-serif italic font-light text-zinc-400">STACK DEVLOPER</span>
+            <span className="font-serif italic font-light text-zinc-400">STACK DEVELOPER</span>
            
           </motion.h1>
         </div>
@@ -96,9 +96,7 @@ const Hero = () => {
           transition={{ delay: 0.5, duration: 1 }}
           className="max-w-xl text-lg md:text-xl text-zinc-500 font-light leading-relaxed mb-12"
         >
-          Dedicated to building digital products that feel 
-          <span className="text-zinc-300"> effortless </span> 
-          and perform with <span className="text-zinc-300"> uncompromising logic.</span>
+          Building modern web applications and scalable solutions.
         </motion.p>
         
         {/* Sophisticated CTA */}
@@ -120,7 +118,6 @@ const Hero = () => {
           <div className="flex items-center gap-8">
             {[
               { Icon: Github, href: "https://github.com/isaacog12" },
-              { Icon: Linkedin, href: "#" },
               { Icon: Mail, href: "mailto:isaacnerds@gmail.com" }
             ].map(({ Icon, href }, i) => (
               <a

@@ -29,7 +29,7 @@ const Footer = () => {
             </div>
             
             <p className="text-zinc-500 text-sm max-w-xs leading-relaxed font-light">
-              Crafting high-performance digital environments with technical precision and human-centered design.
+              Building robust web applications and scalable digital solutions.
             </p>
 
             <div className="flex items-center gap-3">
@@ -46,8 +46,7 @@ const Footer = () => {
             <div className="flex flex-col gap-4">
               {[
                 { name: "GitHub", href: "https://github.com/Isaacog12", icon: Github },
-                { name: "LinkedIn", href: "#", icon: Linkedin },
-                { name: "Twitter", href: "#", icon: Mail },
+                { name: "Twitter", href: "https://twitter.com/isaacog12", icon: Mail },
               ].map((social) => (
                 <a
                   key={social.name}

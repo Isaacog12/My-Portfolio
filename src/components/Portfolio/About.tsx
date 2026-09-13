@@ -21,11 +21,11 @@ const About = () => {
               className="space-y-4"
             >
               <h2 className="text-zinc-600 text-xs tracking-[0.4em] uppercase font-bold">
-                Philosophy
+                About Me
               </h2>
               <h3 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-[1.1]">
-                Engineering with <br />
-                <span className="font-serif italic text-zinc-500 font-light">Intuition.</span>
+                Building for the <br />
+                <span className="font-serif italic text-zinc-500 font-light">Future.</span>
               </h3>
             </motion.div>
 
@@ -37,16 +37,15 @@ const About = () => {
               className="space-y-8 max-w-xl"
             >
               <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed">
-                I am <span className="text-white">Ogbomo Isaac</span>. I don't just write code; I architect 
-                digital environments. I believe that a backend should be as 
-                <span className="text-zinc-200"> robust </span> as the frontend is 
-                <span className="text-zinc-200 font-serif italic"> fluid</span>.
+                I am <span className="text-white">Ogbomo Isaac</span>, a passionate full-stack developer. 
+                I specialize in building scalable web applications and crafting intuitive user 
+                <span className="text-zinc-200 font-serif italic"> experiences</span>.
               </p>
 
               <p className="text-lg text-zinc-500 leading-relaxed">
-                Based in Nigeria, I bridge the gap between complex logic and human-centered delivery. 
-                Whether it's a blockchain verification system or a real-time messaging server, 
-                my goal is to eliminate the friction between the user and the technology.
+                Based in Nigeria, I enjoy working on diverse projects ranging from modern web interfaces 
+                to robust backend systems. With experience in full-stack development and blockchain technologies, 
+                my focus is always on delivering efficient, high-quality solutions that meet real-world needs.
               </p>
 
               {/* Service Pill Tags */}
