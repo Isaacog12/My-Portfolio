@@ -4,6 +4,14 @@ import { Github, ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
+    title: "TixNaija",
+    status: "Production",
+    tech: ["React", "Next.js", "Tailwind CSS"],
+    github: "#",
+    demo: "https://www.tixnaija.name.ng/",
+    image: "https://images.unsplash.com/photo-1540317580384-e5d43867caa6?w=500&q=80",
+  },
+  {
     title: "E-Market",
     status: "In Progress",
     tech: ["React", "TypeScript", "Chart.js"],
