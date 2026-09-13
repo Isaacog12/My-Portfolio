@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Github, Mail, ArrowDownRight } from "lucide-react";
 
 const Hero = () => {
   const [time, setTime] = useState("");
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  // 1. Working 12-hour Clock Logic
   useEffect(() => {
     const updateClock = () => {
       const now = new Date();
@@ -22,128 +19,82 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // 2. Fluid Mouse Parallax (Gentler than before)
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    mouseX.set((clientX / innerWidth - 0.5) * 20);
-    mouseY.set((clientY / innerHeight - 0.5) * 20);
-  };
-
-  const springConfig = { stiffness: 50, damping: 20 };
-  const dx = useSpring(mouseX, springConfig);
-  const dy = useSpring(mouseY, springConfig);
-
-  // 3. Subtle Scroll Fade
-  const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 200], [1, 0]);
-  const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
-
   return (
-    <section 
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="min-h-screen relative flex items-center justify-center overflow-hidden bg-[#0a0a0a] selection:bg-zinc-800 selection:text-white"
-    >
-      {/* --- Organic Background --- */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Soft Grain */}
-        <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-50" />
+    <section className="min-h-screen relative flex items-center bg-[#0a0a0a] pt-24 pb-12 px-6">
+      <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
         
-        {/* Fluid Light Blooms */}
-        <motion.div style={{ x: dx, y: dy }} className="absolute inset-0">
-          <div className="absolute top-[10%] left-[15%] w-[40vw] h-[40vw] bg-blue-600/5 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[10%] right-[15%] w-[35vw] h-[35vw] bg-zinc-500/5 rounded-full blur-[100px]" />
-        </motion.div>
-      </div>
-
-      {/* --- Main Content --- */}
-      <motion.div 
-        style={{ opacity, scale }}
-        className="relative z-10 w-full max-w-5xl px-8 flex flex-col items-center text-center"
-      >
-        {/* Intro Tag */}
-        <motion.p 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-zinc-500 text-sm tracking-[0.2em] uppercase mb-6 font-medium"
-        >
-          Independent Developer & Researcher
-        </motion.p>
-
-        {/* The Title: Elegant & Modern */}
-        <div className="relative mb-10">
-          <motion.h1 
-            initial={{ opacity: 0, filter: "blur(8px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] }}
-            className="text-7xl md:text-[11rem] font-medium tracking-tight text-white leading-[0.8]"
+        {/* Main Typography Column */}
+        <div className="lg:col-span-8 flex flex-col justify-end">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-zinc-500 text-xs font-semibold tracking-widest uppercase mb-8"
           >
-            FULL <br />
-            <span className="font-serif italic font-light text-zinc-400">STACK DEVELOPER</span>
-           
+            Software Engineer / Designer
+          </motion.p>
+
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="text-6xl sm:text-8xl md:text-[8rem] font-bold tracking-tighter text-white leading-[0.85] uppercase"
+          >
+            Full Stack<br />
+            <span className="text-zinc-400 font-light">Developer</span>
           </motion.h1>
         </div>
 
-        {/* Narrative Description (Humanized) */}
-        <motion.p 
+        {/* Narrative & Actions Column */}
+        <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="max-w-xl text-lg md:text-xl text-zinc-500 font-light leading-relaxed mb-12"
+          transition={{ duration: 1, delay: 0.3 }}
+          className="lg:col-span-4 flex flex-col gap-12 lg:pb-4"
         >
-          Building modern web applications and scalable solutions.
-        </motion.p>
-        
-        {/* Sophisticated CTA */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-10 items-center"
-        >
-          <button 
-            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group relative flex items-center gap-4 text-white uppercase text-xs tracking-[0.3em] font-bold"
-          >
-            <span>View Recent Works</span>
-            <div className="w-8 h-px bg-zinc-700 group-hover:w-12 transition-all duration-500" />
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          <p className="text-lg text-zinc-400 font-light leading-relaxed max-w-sm">
+            Building robust web applications and scalable digital solutions with an emphasis on performance and clean design.
+          </p>
 
-          <div className="flex items-center gap-8">
-            {[
-              { Icon: Github, href: "https://github.com/isaacog12" },
-              { Icon: Mail, href: "mailto:isaacnerds@gmail.com" }
-            ].map(({ Icon, href }, i) => (
-              <a
-                key={i}
-                href={href}
-                className="text-zinc-600 hover:text-white transition-colors duration-500"
-              >
-                <Icon size={20} strokeWidth={1.2} />
-              </a>
-            ))}
+          <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+            <button 
+              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group flex items-center justify-between w-full sm:w-auto min-w-[200px] h-14 px-6 border border-white/20 hover:border-white transition-colors duration-300"
+            >
+              <span className="text-white text-xs font-semibold tracking-widest uppercase">View Work</span>
+              <ArrowDownRight className="w-4 h-4 text-white group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
+            </button>
+
+            <div className="flex items-center gap-6 px-2">
+              {[
+                { Icon: Github, href: "https://github.com/isaacog12" },
+                { Icon: Mail, href: "mailto:isaacnerds@gmail.com" }
+              ].map(({ Icon, href }, i) => (
+                <a
+                  key={i}
+                  href={href}
+                  className="text-zinc-500 hover:text-white transition-colors duration-300"
+                >
+                  <Icon size={20} strokeWidth={1.5} />
+                </a>
+              ))}
+            </div>
           </div>
         </motion.div>
-      </motion.div>
+
+      </div>
       
-      {/* --- Minimalist Footer --- */}
-      <div className="absolute bottom-12 left-0 w-full px-12 flex justify-between items-center text-zinc-600">
-        <div className="text-[10px] tracking-[0.2em] uppercase font-medium">
-          Based in Nigeria
-        </div>
-        
-        {/* Simple Working Clock */}
-        <div className="flex items-center gap-4">
-           <div className="w-1 h-1 bg-zinc-800 rounded-full" />
-           <p className="text-[11px] font-mono tracking-tighter text-zinc-500 uppercase">
-            Local / {time || "00:00 AM"}
-          </p>
+      {/* Status Bar Footer */}
+      <div className="absolute bottom-0 left-0 w-full border-t border-white/10 px-6">
+        <div className="max-w-7xl mx-auto h-16 flex justify-between items-center text-zinc-500 text-xs font-semibold tracking-widest uppercase">
+          <div className="flex items-center gap-4">
+            <div className="w-2 h-2 bg-emerald-500/50" />
+            <span>Available for Work</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="hidden sm:inline">Local Time:</span>
+            <span className="text-zinc-300">{time || "00:00"}</span>
+          </div>
         </div>
       </div>
     </section>

@@ -8,92 +8,78 @@ import {
 const skillCategories = [
   {
     icon: Code2,
-    title: "Frontend Artistry",
-    description: "Interfaces that feel natural.",
-    skills: ["React", "Next.js", "TS", "Tailwind"],
-    className: "md:col-span-2 md:row-span-1",
-    accent: "from-blue-500/10 to-transparent"
+    title: "Frontend Engineering",
+    description: "Interfaces that feel natural and performant.",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    className: "md:col-span-2 md:row-span-1"
   },
   {
     icon: Database,
     title: "Backend",
-    description: "Scalable data structures.",
-    skills: ["Node", "Postgres", "Supabase"],
-    className: "md:col-span-1 md:row-span-1",
-    accent: "from-emerald-500/10 to-transparent"
+    description: "Scalable data structures and APIs.",
+    skills: ["Node.js", "PostgreSQL", "Supabase", "Redis"],
+    className: "md:col-span-1 md:row-span-1"
   },
   {
     icon: Palette,
     title: "Visuals",
-    description: "Design to functional code.",
-    skills: ["Figma", "Motion", "UX"],
-    className: "md:col-span-1 md:row-span-1",
-    accent: "from-purple-500/10 to-transparent"
+    description: "From design to functional code.",
+    skills: ["Figma", "Framer Motion", "UX Design"],
+    className: "md:col-span-1 md:row-span-1"
   },
   {
     icon: Terminal,
     title: "Systems",
     description: "Deployment & CI/CD flow.",
-    skills: ["Git", "Vercel"],
-    className: "md:col-span-2 md:row-span-1",
-    accent: "from-orange-500/10 to-transparent"
+    skills: ["Git", "Vercel", "Docker", "AWS"],
+    className: "md:col-span-2 md:row-span-1"
   }
 ];
 
 const Skills = () => {
   return (
-    <section className="py-20 px-6 bg-[#0a0a0a] text-white">
-      <div className="max-w-5xl mx-auto">
+    <section className="py-32 px-6 bg-[#0a0a0a] text-white border-t border-white/10">
+      <div className="max-w-7xl mx-auto">
         
-        {/* Compact Header */}
-        <div className="flex flex-col mb-12 space-y-3">
-          <div className="flex items-center gap-3">
-            <span className="text-zinc-600 font-bold text-[10px] tracking-[0.4em] uppercase">skills</span>
-            <div className="h-[1px] w-8 bg-zinc-800" />
-          </div>
+        {/* Header */}
+        <div className="flex flex-col mb-16 space-y-4">
+          <span className="text-zinc-500 font-semibold text-xs tracking-widest uppercase">Expertise</span>
           <h2 className="text-4xl md:text-5xl font-medium tracking-tight">
-            Tools and Technologies.
+            Tools & Technologies
           </h2>
         </div>
 
-        {/* Contained Grid with Edges */}
-        <div className="grid grid-cols-1 md:grid-cols-3 border border-white/5 bg-[#0d0d0d] rounded-2xl overflow-hidden shadow-2xl">
+        {/* Minimal Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10">
           {skillCategories.map((cat, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className={`group relative p-8 border-white/5 border-[0.5px] transition-all duration-500 hover:bg-white/[0.02] ${cat.className}`}
+              transition={{ delay: i * 0.1 }}
+              className={`relative p-10 bg-[#0a0a0a] hover:bg-white/[0.03] transition-colors duration-300 flex flex-col justify-between ${cat.className}`}
             >
-              {/* Subtle Gradient Hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${cat.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-              
-              <div className="relative z-10 h-full flex flex-col justify-between">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="p-2 rounded-lg bg-white/5 text-zinc-500 group-hover:text-white transition-colors">
-                      <cat.icon size={20} strokeWidth={1.5} />
-                    </div>
-                    <h3 className="text-lg font-medium tracking-tight text-zinc-200">{cat.title}</h3>
-                  </div>
-                  
-                  <p className="text-sm text-zinc-500 leading-relaxed font-light line-clamp-2">
-                    {cat.description}
-                  </p>
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <cat.icon size={20} strokeWidth={1.5} className="text-white" />
+                  <h3 className="text-lg font-medium tracking-tight text-white">{cat.title}</h3>
                 </div>
+                
+                <p className="text-sm text-zinc-500 leading-relaxed font-light">
+                  {cat.description}
+                </p>
+              </div>
 
-                <div className="flex flex-wrap gap-2 mt-6">
-                  {cat.skills.map((skill) => (
-                    <span 
-                      key={skill} 
-                      className="text-[9px] uppercase tracking-widest font-bold px-2.5 py-1 rounded bg-black/40 border border-white/5 text-zinc-500 group-hover:text-zinc-300 group-hover:border-white/10 transition-all"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex flex-wrap gap-2 mt-10">
+                {cat.skills.map((skill) => (
+                  <span 
+                    key={skill} 
+                    className="text-[10px] uppercase tracking-widest font-semibold px-3 py-1.5 border border-white/10 text-zinc-400"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
