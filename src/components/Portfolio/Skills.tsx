@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { 
   Code2, Database, Palette, 
-  Terminal, Globe, Cpu 
+  Terminal 
 } from "lucide-react";
 
 const skillCategories = [
